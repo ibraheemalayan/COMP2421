@@ -25,6 +25,10 @@ By
 */
 
 /*
+
+        Run the code in ANSI-compatible Terminal 
+        e.g : cmd, powershell,  bash, zsh, macos terminal, iterm, iterm2
+
         Color Codes
 
 Black: \033[0;30m
@@ -56,7 +60,7 @@ Reset: \033[0m
 // ////////////////////// Define Structs
 // /////////////////////////////////////////////////
 
-struct CourseNode
+struct CourseObject
 {
     char name[50];
     char id[10];
@@ -65,11 +69,18 @@ struct CourseNode
     int max_seats;
     int waiting;
     int registration_index; // index in the registration array (of students' linked lists)
+};
+
+struct CourseNode
+{
+    struct CourseObject *obj_ptr;
     struct CourseNode *next;
 };
 
+
 typedef struct CourseNode *CourseLL;
-typedef struct CourseNode Course;
+typedef struct CourseNode CourseNode;
+typedef struct CourseObject CourseObject;
 
 struct StudentObject
 {
@@ -94,16 +105,17 @@ typedef struct StudentObject StudentObject;
 
 void read_courses();
 void read_students(StudentLL registration[], StudentLL waiting_list[]);
-Course *construct_course(char name[50], char id[10], int year, int max_seats);
-void print_course(Course *c);
+CourseObject * construct_course(char name[50], char id[10], int year, int max_seats);
+CourseNode * construct_course_node(CourseObject * course);
+void print_course(CourseNode *c);
 StudentObject *construct_student(char name[50], int id);
 void print_student(StudentObject *c);
 CourseLL init_courses_linked_list();
-void insert_course(Course *to_append);
+void insert_course(CourseNode *to_append);
 void insert_student(StudentObject *obj_ptr);
 void insert_student_in_LL(StudentObject *new_obj, StudentLL header);
 void print_courses_LL();
-Course *get_course_by_id(char id[10]);
+CourseNode *get_course_by_id(char id[10]);
 int RegisterStudent(StudentObject *s, char course_id[10], StudentLL registration[], StudentLL waiting_list[]);
 void print_list_of_LLs(StudentLL array[]);
 void print_students_LL(StudentLL header);
@@ -136,7 +148,8 @@ void read_courses()
     while (fscanf(courses_file, "\n%[^,],%[^,],%d,%d", name, id, &year, &max_seats) == 4)
     {
 
-        Course *c = construct_course(name, id, year, max_seats);
+        CourseObject * obj = construct_course(name, id, year, max_seats);
+        CourseNode * c = construct_course_node(obj);
 
         insert_course(c);
     }
@@ -179,11 +192,10 @@ void read_students(StudentLL registration[], StudentLL waiting_list[])
 // ////////////////////// Courses Functions
 // /////////////////////////////////////////////////
 
-Course *construct_course(char name[50], char id[10], int year, int max_seats)
+CourseObject * construct_course(char name[50], char id[10], int year, int max_seats)
 {
 
-    Course *res = (Course *)malloc(sizeof(Course));
-    ;
+    CourseObject *res = (CourseObject *)malloc(sizeof(CourseObject));
 
     strcpy(res->name, name);
     strcpy(res->id, id);
@@ -197,20 +209,30 @@ Course *construct_course(char name[50], char id[10], int year, int max_seats)
     return res;
 }
 
-// TODO remove
-void print_course_debug(Course *c)
+CourseNode * construct_course_node(CourseObject * course)
 {
-    printf("< Course index:'\033[0;31m%d\033[0m' id:'\033[0;31m%s\033[0m'  max seats:\033[1;34m%d\033[0m  year:\033[0;34m%d\033[0m\tcurrent seats:\033[1;34m%d\033[0m\twaiting:\033[1;34m%d\033[0m\tname:'\033[0;32m%s\033[0m'>", c->registration_index, c->id, c->max_seats, c->year, c->current_seats, c->waiting, c->name);
+
+    CourseNode *res = (CourseNode *)malloc(sizeof(CourseNode));
+
+    res->obj_ptr = course;
+
+    return res;
 }
 
-void print_course(Course *c)
+// TODO remove
+void print_course_debug(CourseNode *c)
 {
-    printf("| \033[0;33m%-6d\033[0m | \033[0;31m%-8s\033[0m | \033[1;34m%-3d\033[0m | \033[0;34m%-3d\033[0m | \033[1;36m%-8d\033[0m | \033[1;34m%-8d\033[0m | \033[0;32m%-50s\033[0m |\n", c->registration_index, c->id, c->max_seats, c->year, c->current_seats, c->waiting, c->name);
+    printf("< Course index:'\033[0;31m%d\033[0m' id:'\033[0;31m%s\033[0m'  max seats:\033[1;34m%d\033[0m  year:\033[0;34m%d\033[0m\tcurrent seats:\033[1;34m%d\033[0m\twaiting:\033[1;34m%d\033[0m\tname:'\033[0;32m%s\033[0m'>", c->obj_ptr->registration_index, c->obj_ptr->id, c->obj_ptr->max_seats, c->obj_ptr->year, c->obj_ptr->current_seats, c->obj_ptr->waiting, c->obj_ptr->name);
+}
+
+void print_course(CourseNode *c)
+{
+    printf("| \033[0;33m%-6d\033[0m | \033[0;31m%-8s\033[0m | \033[1;34m%-3d\033[0m | \033[0;34m%-3d\033[0m | \033[1;36m%-8d\033[0m | \033[1;34m%-8d\033[0m | \033[0;32m%-50s\033[0m |\n", c->obj_ptr->registration_index, c->obj_ptr->id, c->obj_ptr->max_seats, c->obj_ptr->year, c->obj_ptr->current_seats, c->obj_ptr->waiting, c->obj_ptr->name);
 }
 
 void print_heading(char heading[])
 {
-    printf("\n\n-----------------------------------\n> %s \n-----------------------------------\n", heading);
+    printf("\n\n-----------------------------------\n> \033[0;31m%s\033[0m \n-----------------------------------\n", heading);
 }
 
 // /////////////////////////////////////////////////
@@ -247,7 +269,7 @@ void print_student(StudentObject *s)
 CourseLL init_courses_linked_list()
 {
 
-    Course *header = (CourseLL)malloc(sizeof(Course));
+    CourseNode *header = (CourseLL)malloc(sizeof(CourseNode));
 
     header->next = NULL;
 
@@ -256,18 +278,18 @@ CourseLL init_courses_linked_list()
     return header;
 }
 
-// inserts course such that the linked list is sorted ascending by ID (reduces insertion complexity and reduces search complexity)
-void insert_course(Course *to_append)
+// inserts course such that the linked list is sorted ascending by ID (reduces search complexity)
+void insert_course(CourseNode *to_append)
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     int added = 0;
     int i = 0;
 
     while (current->next)
     {
-        if (strcmp((current->next->id), (to_append->id)) == 1)
+        if (strcmp((current->next->obj_ptr->id), (to_append->obj_ptr->id)) > 0)
         {
 
             to_append->next = current->next;
@@ -289,15 +311,49 @@ void insert_course(Course *to_append)
         to_append->next = NULL;
     }
 
-    to_append->registration_index = courses_count;
+    to_append->obj_ptr->registration_index = courses_count;
 
     courses_count++;
+}
+
+// inserts course such that the linked list is sorted ascending by Name
+void insert_course_by_name(CourseLL header, CourseObject *obj)
+{
+
+    CourseNode * new_node = construct_course_node(obj);
+    
+    CourseLL current = header;
+
+    int added = 0;
+
+    while (current->next)
+    {
+        if (strcmp((current->next->obj_ptr->name), (new_node->obj_ptr->name)) > 0)
+        {
+
+            new_node->next = current->next;
+            current->next = new_node;
+            added = 1;
+            break;
+        }
+
+        current = current->next;
+    }
+
+    if (!added)
+    {
+
+        current->next = new_node;
+
+        new_node->next = NULL;
+    }
+
 }
 
 void print_courses_LL()
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     printf("\n\n\nLinked List > ");
 
@@ -430,20 +486,18 @@ void print_simple_students_LL(StudentLL header)
 
 void print_registration(StudentLL registration[])
 {
-    print_heading("Registration Array");
     print_list_of_LLs(registration);
 }
 
 void print_waiting_list(StudentLL waiting_list[])
 {
-    print_heading("Waiting List Array");
     print_list_of_LLs(waiting_list);
 }
 
 void print_sorted_courses_table_by_id()
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     printf("------------------------------------------------------------------------------------------------------------\n");
     printf("\033[0;33m  index\033[0m   \033[0;31m    ID    \033[0m \033[1;34m Max \033[0m \033[0;34m Year \033[0m \033[1;36mCurrent\033[0m \033[1;34m   Waiting\033[0m             \033[0;32mName\033[0m                                      |\n");
@@ -461,9 +515,18 @@ void print_sorted_courses_table_by_id()
 void print_sorted_courses_table_by_name()
 {
 
-    // TODO sort by name
+    CourseLL new_ll = init_courses_linked_list();
+;
+    CourseNode *current = courses;
 
-    Course *current = courses;
+    // Sort
+    while (current->next != NULL)
+    {
+        insert_course_by_name(new_ll, current->next->obj_ptr);
+        current = current->next;
+    }
+
+    current = new_ll;
 
     printf("------------------------------------------------------------------------------------------------------------\n");
     printf("\033[0;33m  index\033[0m   \033[0;31m    ID    \033[0m \033[1;34m Max \033[0m \033[0;34m Year \033[0m \033[1;36mCurrent\033[0m \033[1;34m   Waiting\033[0m             \033[0;32mName\033[0m                                      |\n");
@@ -481,7 +544,7 @@ void print_sorted_courses_table_by_name()
 void print_sorted_courses_table_less_than_5()
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     printf("------------------------------------------------------------------------------------------------------------\n");
     printf("\033[0;33m  index\033[0m   \033[0;31m    ID    \033[0m \033[1;34m Max \033[0m \033[0;34m Year \033[0m \033[1;36mCurrent\033[0m \033[1;34m   Waiting\033[0m             \033[0;32mName\033[0m                                      |\n");
@@ -489,7 +552,7 @@ void print_sorted_courses_table_less_than_5()
 
     while (current->next != NULL)
     {
-        if (current->next->current_seats < 5)
+        if (current->next->obj_ptr->current_seats < 5)
         {
             print_course((current->next));
         }
@@ -500,25 +563,25 @@ void print_sorted_courses_table_less_than_5()
     printf("------------------------------------------------------------------------------------------------------------\n");
 }
 
-void print_course_students_table(Course *course, StudentLL registration[], StudentLL waiting_list[])
+void print_course_students_table(CourseNode *course, StudentLL registration[], StudentLL waiting_list[])
 {
 
     printf("\n\n\n\033[1;31m----------------------------------------------------------------------");
     printf("\n----------------------------------------------------------------------\033[0m \n\n\n");
 
-    if (registration[course->registration_index]->next == NULL)
+    if (registration[course->obj_ptr->registration_index]->next == NULL)
     {
-        printf("Course \033[1;32m%s\033[0m has no registered students", course->id);
+        printf("Course \033[1;32m%s\033[0m has no registered students", course->obj_ptr->id);
         return;
     }
 
-    printf("Course \033[1;32m%s\033[0m registered students:\n", course->id);
+    printf("Course \033[1;32m%s\033[0m registered students:\n", course->obj_ptr->id);
 
     printf("----------------------------------------------------------------------\n");
     printf("\033[0;33m ID      \033[0m \033[0;34m #reg \033[0m           \033[0;32mName\033[0m                                      |\n");
     printf("----------------------------------------------------------------------\n");
 
-    StudentNode *current = registration[course->registration_index];
+    StudentNode *current = registration[course->obj_ptr->registration_index];
 
     while (current->next != NULL)
     {
@@ -528,7 +591,7 @@ void print_course_students_table(Course *course, StudentLL registration[], Stude
     }
     printf("----------------------------------------------------------------------\n");
 
-    if (waiting_list[course->registration_index]->next == NULL)
+    if (waiting_list[course->obj_ptr->registration_index]->next == NULL)
     {
         return;
     }
@@ -539,7 +602,7 @@ void print_course_students_table(Course *course, StudentLL registration[], Stude
     printf("\033[0;33m ID      \033[0m \033[0;34m #reg \033[0m           \033[0;32mName\033[0m                                      |\n");
     printf("----------------------------------------------------------------------\n");
 
-    current = waiting_list[course->registration_index];
+    current = waiting_list[course->obj_ptr->registration_index];
 
     while (current->next != NULL)
     {
@@ -553,7 +616,7 @@ void print_course_students_table(Course *course, StudentLL registration[], Stude
 void print_sorted_students_tables(StudentLL registration[], StudentLL waiting_list[])
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     while (current->next != NULL)
     {
@@ -577,10 +640,10 @@ void init_array_of_students_LLs(StudentLL registration[], int courses_count)
 // ////////////////////// Search Functions
 // /////////////////////////////////////////////////
 
-Course *get_course_by_id(char id[10])
+CourseNode *get_course_by_id(char id[10])
 {
 
-    Course *current = courses;
+    CourseNode *current = courses;
 
     while (current->next != NULL)
     {
@@ -588,9 +651,9 @@ Course *get_course_by_id(char id[10])
         // measure complexity
         // printf("n");
 
-        int cmp = strcmp(id, current->next->id);
+        int cmp = strcmp(id, current->next->obj_ptr->id);
 
-        if (cmp == -1)
+        if (cmp < 0)
         {
 
             return NULL;
@@ -638,7 +701,7 @@ void search_for_course_and_print_students(StudentLL registration[], StudentLL wa
     char id[10];
     scanf("%s", id);
 
-    Course *course = get_course_by_id(id);
+    CourseNode *course = get_course_by_id(id);
 
     if (course == NULL)
     {
@@ -657,7 +720,7 @@ void search_for_student_in_course(StudentLL registration[])
     char course_id[10];
     scanf("%s", course_id);
 
-    Course *course = get_course_by_id(course_id);
+    CourseNode *course = get_course_by_id(course_id);
 
     if (course == NULL)
     {
@@ -667,11 +730,11 @@ void search_for_student_in_course(StudentLL registration[])
 
     int student_id;
 
-    printf("Enter Student ID : ");
+    printf("Enter Student ID (int): ");
 
     scanf("%d", &student_id);
 
-    StudentNode *s = get_student_by_id_from_course(registration[course->registration_index], student_id);
+    StudentNode *s = get_student_by_id_from_course(registration[course->obj_ptr->registration_index], student_id);
 
     if (s == NULL)
     {
@@ -713,7 +776,7 @@ int RegisterStudent(StudentObject *s, char course_id[10], StudentLL registration
         return 1;
     }
 
-    Course *course = get_course_by_id(course_id);
+    CourseNode *course = get_course_by_id(course_id);
 
     if (course == NULL)
     {
@@ -721,25 +784,25 @@ int RegisterStudent(StudentObject *s, char course_id[10], StudentLL registration
         return 1;
     }
 
-    if (!can_register(s->id, course->year))
+    if (!can_register(s->id, course->obj_ptr->year))
     {
-        printf("\033[0;31mcannot register, student must be from year %d or older\033[0m", course->year);
+        printf("\033[0;31mcannot register, student must be from year %d or older\033[0m", course->obj_ptr->year);
         return 1;
     }
 
-    if (course->current_seats >= course->max_seats)
+    if (course->obj_ptr->current_seats >= course->obj_ptr->max_seats)
     {
-        insert_student_in_LL(s, waiting_list[course->registration_index]);
-        course->waiting++;
+        insert_student_in_LL(s, waiting_list[course->obj_ptr->registration_index]);
+        course->obj_ptr->waiting++;
         printf("\033[0;33mcourse is full, added student to waiting list\033[0m");
         return 1;
     }
 
-    course->current_seats++;
+    course->obj_ptr->current_seats++;
 
     s->registered_courses++;
 
-    insert_student_in_LL(s, registration[course->registration_index]);
+    insert_student_in_LL(s, registration[course->obj_ptr->registration_index]);
 
     printf("\033[0;32mregistered\033[0m");
 
@@ -775,21 +838,23 @@ void show_menu(StudentLL registration[], StudentLL waiting_list[])
 
         printf("\nAvailable Commands:\n\n");
 
-        printf("\033[0;31mq \033[0m: Quit\n");
-
         printf("\n\033[0;34m --- Debug --- \033[0m\n");
-        printf("\033[0;31m0 \033[0m: Print Full Students LinkedList\n");
-        printf("\033[0;31m1 \033[0m: Print Full Courses LinkedList\n");
-        printf("\033[0;31m2 \033[0m: Print Registration Array of Students' LinkedLists (IDs only) \n");
-        printf("\033[0;31m3 \033[0m: Print Waiting List Array of Students' LinkedLists (IDs only) \n");
+        printf("\033[0;31m1 \033[0m: Print Full Students LinkedList\n");
+        printf("\033[0;31m2 \033[0m: Print Full Courses LinkedList\n");
+        printf("\033[0;31m3 \033[0m: Print Registration Array of Students' LinkedLists (IDs only) \n");
+        printf("\033[0;31m4 \033[0m: Print Waiting List Array of Students' LinkedLists (IDs only) \n");
 
         printf("\n\033[0;34m --- Reports --- \033[0m\n");
-        printf("\033[0;31m4 \033[0m: Print Courses Table Sorted By Name\n");
-        printf("\033[0;31m5 \033[0m: Print Courses Table Sorted By ID\n");
-        printf("\033[0;31m6 \033[0m: Print Students Info In courses tables (ordered by student ID)\n");
-        printf("\033[0;31m7 \033[0m: Print Courses With Less Than 5 Students (ordered by course ID)\n");
-        printf("\033[0;31m8 \033[0m: Find Course & Print Its Students (based on course ID)\n");
-        printf("\033[0;31m9 \033[0m: Search For Student In Course (based on student and course IDs) \n");
+        printf("\033[0;31m5 \033[0m: Print Courses Table Sorted By Name\n");
+        printf("\033[0;31m6 \033[0m: Print Courses Table Sorted By ID\n");
+        printf("\033[0;31m7 \033[0m: Print Students Info In courses tables (ordered by student ID)\n");
+        printf("\033[0;31m8 \033[0m: Print Courses With Less Than 5 Students (ordered by course ID)\n");
+
+        printf("\n\033[0;34m --- Search --- \033[0m\n");
+        printf("\033[0;31m9 \033[0m: Find Course & Print Its Students (based on course ID)\n");
+        printf("\033[0;31m10 \033[0m: Search For Student In Course (based on student and course IDs) \n");
+
+        printf("\n\033[0;31mq \033[0m: Quit\n");
 
         printf("\n > \033[0;36mEnter command number to excute : \033[0m");
 
@@ -800,43 +865,53 @@ void show_menu(StudentLL registration[], StudentLL waiting_list[])
 
         switch (command)
         {
-        case 0:
+        case 1:
+            print_heading("Full Students LinkedList");
             print_students_LL(students);
             break;
 
-        case 1:
+        case 2:
+            print_heading("Full Courses LinkedList");
             print_courses_LL();
             break;
 
-        case 2:
+        case 3:
+            print_heading("Registration Array of Students' LinkedLists (IDs only)");
             print_registration(registration);
             break;
 
-        case 3:
+        case 4:
+            print_heading("Waiting List Array of Students' LinkedLists (IDs only)");
             print_waiting_list(waiting_list);
             break;
 
-        case 4:
+        case 5:
+            print_heading("Courses Table Sorted By Name");
             print_sorted_courses_table_by_name();
             break;
 
-        case 5:
+        case 6:
+            print_heading("Courses Table Sorted By ID");
             print_sorted_courses_table_by_id();
             break;
 
-        case 6:
+        case 7:
+            print_heading("Students Info In courses tables (ordered by student ID)");
             print_sorted_students_tables(registration, waiting_list);
             break;
 
-        case 7:
+        case 8:
+            print_heading("Print Courses With Less Than 5 Students (ordered by course ID)");
             print_sorted_courses_table_less_than_5();
             break;
 
-        case 8:
+        case 9:
+            print_heading("Find Course & Print Its Students");
             search_for_course_and_print_students(registration, waiting_list);
             break;
 
-        case 9:
+        case 10:
+            print_heading("Search For Student In Course (based on student and course IDs)");
             search_for_student_in_course(registration);
             break;
 
