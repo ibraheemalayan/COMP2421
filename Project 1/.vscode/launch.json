@@ -1,0 +1,18 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": true,
+      "cwd": "/Users/ibraheemalyan/Desktop/unv/2021-Fall/COMP2421 - Data Structure & Algorithims/Project 1/Project 1",
+      "environment": [],
+      "program": "/Users/ibraheemalyan/Desktop/unv/2021-Fall/COMP2421 - Data Structure & Algorithims/Project 1/Project 1/build/Debug/outDebug",
+      "internalConsoleOptions": "openOnSessionStart",
+      "MIMode": "lldb",
+      "externalConsole": true
+    }
+  ]
+}
