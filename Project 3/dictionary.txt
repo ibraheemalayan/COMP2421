@@ -1,0 +1,149 @@
+foe: enemy 
+vast: huge		
+purchase: buy	
+drowsy: sleepy	
+absent: missing	 
+prank: trick		
+feeble: weak	
+annual: yearly
+sturdy: strong	
+reply: answer	
+voyage: trip	
+shiver: shudder
+slumber: sleep	
+meadow: field
+banner: flag
+loyal: faithful
+ill: sick
+vacant: empty
+stalk: stem	
+wild: untamed
+slosh: splash
+frayed: worn
+overcast: cloudy
+mammoth: large
+furious: angry
+assist: help
+task: job
+bothersome: annoying
+lurk: wait
+orbit: circle
+deep: many feet of water		
+shallow: not much water
+flexible: bends easily	
+rigid: stiff
+pain: what you feel when something bad happens	
+pleasure: a happy feeling
+repair: fix		
+break: shatter
+infant: baby	
+adult: grownup	
+bright: light	
+neat: tidy	
+dim: not much light			
+sloppy: messy	
+gracious: polite
+attic: at the top of the house
+cellar: at the bottom of the house	
+rude: not polite
+borrow: you get something		
+lend: to give something			
+birdbath: bath for birds
+eyelid: protects your eye			
+waterfall: when water drops over a cliff
+keyboard: part of a piano that you play	
+lunchtime: middle meal of the day
+hairbrush: what you use to brush hair	
+springboard: flexible board to jump from
+scorekeeper: someone who keeps score	
+rainbow: a band of colors
+catfish: a fish with whiskers	
+beehive: where bees make honey
+sandbox: where kids play with sand	
+hillside: steep, sloping land
+spaceship: what an astronaut rides in	
+applesauce: made when cooking apples
+homework: assignment done at home	
+crosswalk: where you should cross street
+railroad: what trains travel on		
+turtleneck: a long neck
+rowboat: small boat  moved by rowing	
+fur: covering of most animals
+fir: a kind of evergreen tree		
+principle: a rule
+principal: the head of a school		
+paws: feet		
+pause: take a break	
+wail: cry	
+whale: a large animal living in the sea
+berry: a fruit		
+bury: to cover up	
+stake: a stick that you hammer into ground	
+steak: meat you eat
+peak: top of a mountain		
+peek: to look	
+council: a group of people making plans		
+counsel: to give advice
+ant: an insect	
+aunt: female relative	
+threw: past tense of throw
+through: from here to there	
+dove: bird/past tense of dive  
+record: to write down/something important  	
+live: living/to dwell
+lead: to be at the beginning/a type of metal	
+wind: air that moves/to turn 
+grandchildren: children of your children		
+echoes: repeated sounds
+halves: two equal parts	
+geese: large birds that make honking sound
+mysteries: things that are secret or hard to explain	
+oxen: large farm animals in the cattle family	
+sketches: quick drawings
+feet: at  he end of our legs 
+sheep: animals whose fur is used for wool
+coast: land along the sea 
+host: one who gives the party
+limb: a branch of a tree	
+fern: a kind of plant	
+glee: joy
+yearn: to really long for something	
+plea: to beg for something
+shriek: a loud sound	
+creek: a smaller, moving body of water
+moose: a large animal with antlers	
+chipmunk: a small animal resembling a squirrel
+noodle: made of flour, water, and eggs		
+kindergarten: before 1st grade
+loft: a room just under the roof of a building
+bungalow: a small, one story house	
+dinghy: a small boat
+boss: the person in charge of a job    
+drum: something you hit to make sounds
+patio: a paved area near a house	
+plaza: an open space in a city or town
+ballet: a form of dance	
+garage: a place to park cars
+pizza: a kind of pie with cheese and tomatoes on a crust
+bravo: what an audience yells when they like the performance
+bike: something you pedal to make its wheels move
+exam: a kind of test	
+mitt: what baseball players catch with
+bus: what some kids ride to school 
+lab: where scientists do their research
+zoo: a place where animals are kept	
+sub: something that travels under water
+auto: a form of transportation	
+kit: a baby fox 	
+piglet: a baby pig
+math: the study of numbers, shapes, and measurements 
+fawn: a baby deer
+gosling: a baby goose	
+cub: a young bear, lion, or tiger
+calf: a baby cow, elephant, or whale	
+foal: a young horse or donkey
+cygnet: a young swan	
+kid: a young goat		
+joey: a baby kangaroo
+freighter: a ship that carries cargo 
+helm: the wheel used for steering the ship

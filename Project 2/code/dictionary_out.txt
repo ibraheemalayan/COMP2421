@@ -1,0 +1,38 @@
+1. foe: enemy	2. drowsy: sleepy	3. absent: missing	
+4. annual: yearly	5. adult: grownup	6. banner: flag	7. assist: help	
+8. applesauce: made when cooking apples	9. ant: an insect	10. attic: at the top of the house	11. aunt: female relative	
+12. ballet: a form of dance	13. auto: a form of transportation	14. bothersome: annoying	15. borrow: you get something	
+16. birdbath: bath for birds	17. beehive: where bees make honey	18. berry: a fruit	19. bike: something you pedal to make its wheels move	
+20. boss: the person in charge of a job    	21. deep: many feet of water	22. break: shatter	23. bright: light	
+24. cellar: at the bottom of the house	25. catfish: a fish with whiskers	26. bury: to cover up	27. bungalow: a small, one story house	
+28. bus: what some kids ride to school 	29. calf: a baby cow, elephant, or whale	30. crosswalk: where you should cross street	31. council: a group of people making plans	
+32. coast: land along the sea 	33. chipmunk: a small animal resembling a squirrel	34. counsel: to give advice	35. creek: a smaller, moving body of water	
+36. cub: a young bear, lion, or tiger	37. cygnet: a young swan	38. dim: not much light	39. dove: bird/past tense of dive  	
+40. dinghy: a small boat	41. feeble: weak	42. eyelid: protects your eye	43. echoes: repeated sounds	
+44. drum: something you hit to make sounds	45. exam: a kind of test	46. fawn: a baby deer	47. flexible: bends easily	
+48. fir: a kind of evergreen tree	49. feet: at  he end of our legs 	50. fern: a kind of plant	51. foal: a young horse or donkey	
+52. vast: huge	53. purchase: buy	54. prank: trick	55. meadow: field	
+56. loyal: faithful	57. ill: sick	58. frayed: worn	59. furious: angry	
+60. fur: covering of most animals	61. freighter: a ship that carries cargo 	62. gracious: polite	63. geese: large birds that make honking sound	
+64. garage: a place to park cars	65. glee: joy	66. gosling: a baby goose	67. hairbrush: what you use to brush hair	
+68. grandchildren: children of your children	69. hillside: steep, sloping land	70. halves: two equal parts	71. helm: the wheel used for steering the ship	
+72. homework: assignment done at home	73. host: one who gives the party	74. infant: baby	75. lend: to give something	
+76. keyboard: part of a piano that you play	77. joey: a baby kangaroo	78. lead: to be at the beginning/a type of metal	79. kindergarten: before 	
+80. kid: a young goat	81. lab: where scientists do their research	82. kit: a baby fox 	83. live: living/to dwell	
+84. limb: a branch of a tree	85. loft: a room just under the roof of a building	86. mammoth: large	87. lurk: wait	
+88. lunchtime: middle meal of the day	89. math: the study of numbers, shapes, and measurements 	90. overcast: cloudy	91. orbit: circle	
+92. neat: tidy	93. mysteries: things that are secret or hard to explain	94. moose: a large animal with antlers	95. mitt: what baseball players catch with	
+96. noodle: made of flour, water, and eggs	97. pain: what you feel when something bad happens	98. oxen: large farm animals in the cattle family	99. pleasure: a happy feeling	
+100. paws: feet	101. pause: take a break	102. patio: a paved area near a house	103. peak: top of a mountain	
+104. peek: to look	105. plea: to beg for something	106. pizza: a kind of pie with cheese and tomatoes on a crust	107. piglet: a baby pig	
+108. principle: a rule	109. principal: the head of a school	110. sturdy: strong	111. reply: answer	
+112. repair: fix	113. rainbow: a band of colors	114. railroad: what trains travel on	115. record: to write down/something important  	
+116. shiver: shudder	117. shallow: not much water	118. rigid: stiff	119. rude: not polite	
+120. rowboat: small boat  moved by rowing	121. scorekeeper: someone who keeps score	122. sandbox: where kids play with sand	123. sheep: animals whose fur is used for wool	
+124. slumber: sleep	125. slosh: splash	126. sloppy: messy	127. sketches: quick drawings	
+128. shriek: a loud sound	129. stalk: stem	130. springboard: flexible board to jump from	131. spaceship: what an astronaut rides in	
+132. stake: a stick that you hammer into ground	133. steak: meat you eat	134. vacant: empty	135. task: job	
+136. sub: something that travels under water	137. turtleneck: a long neck	138. threw: past tense of throw	139. through: from here to there	
+140. voyage: trip	141. wild: untamed	142. waterfall: when water drops over a cliff	143. wail: cry	
+144. whale: a large animal living in the sea	145. wind: air that moves/to turn 	146. yearn: to really long for something	147. �bravo�: what an audience yells when they like the performance	
+148. zoo: a place where animals are kept	
